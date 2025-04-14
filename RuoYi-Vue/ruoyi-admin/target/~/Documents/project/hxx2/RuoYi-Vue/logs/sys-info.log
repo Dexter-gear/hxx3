@@ -40,3 +40,6 @@
 17:28:17.139 [schedule-pool-48] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
 17:29:43.894 [schedule-pool-16] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Success][登录成功]
 17:47:44.231 [schedule-pool-17] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+23:27:06.808 [schedule-pool-16] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+23:27:40.457 [schedule-pool-30] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Logout][退出成功]
+23:29:42.519 [schedule-pool-8] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]

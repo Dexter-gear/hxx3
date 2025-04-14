@@ -31,6 +31,7 @@ export function fetchProduct(productId) {
         return [];
       });
   }
+
   function fetchCartWithProducts() {
     fetchCart().then(cartItems => {
       if (!Array.isArray(cartItems)) {
