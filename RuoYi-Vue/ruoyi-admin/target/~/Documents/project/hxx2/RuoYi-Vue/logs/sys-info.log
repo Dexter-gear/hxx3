@@ -1,0 +1,42 @@
+14:44:56.223 [main] INFO  c.r.RuoYiApplication - [logStarting,55] - Starting RuoYiApplication using Java 23.0.2 on lingluodeMacBook-Air.local with PID 82736 (/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/target/ruoyi-admin.jar started by lingluo in /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/target)
+14:44:56.225 [main] INFO  c.r.RuoYiApplication - [logStartupProfileInfo,686] - The following 1 profile is active: "druid"
+14:44:56.226 [background-preinit] INFO  o.h.v.i.util.Version - [<clinit>,21] - HV000001: Hibernate Validator 6.2.5.Final
+14:44:57.765 [main] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Initializing ProtocolHandler ["http-nio-8080"]
+14:44:57.766 [main] INFO  o.a.c.c.StandardService - [log,173] - Starting service [Tomcat]
+14:44:57.766 [main] INFO  o.a.c.c.StandardEngine - [log,173] - Starting Servlet engine: [Apache Tomcat/9.0.102]
+14:44:57.819 [main] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring embedded WebApplicationContext
+14:44:58.770 [main] INFO  c.a.d.p.DruidDataSource - [init,1002] - {dataSource-1} inited
+14:45:00.041 [main] INFO  o.q.i.StdSchedulerFactory - [instantiate,1220] - Using default implementation for ThreadExecutor
+14:45:00.050 [main] INFO  o.q.c.SchedulerSignalerImpl - [<init>,61] - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+14:45:00.051 [main] INFO  o.q.c.QuartzScheduler - [<init>,229] - Quartz Scheduler v.2.3.2 created.
+14:45:00.051 [main] INFO  o.q.s.RAMJobStore - [initialize,155] - RAMJobStore initialized.
+14:45:00.051 [main] INFO  o.q.c.QuartzScheduler - [initialize,294] - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+14:45:00.052 [main] INFO  o.q.i.StdSchedulerFactory - [instantiate,1374] - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+14:45:00.052 [main] INFO  o.q.i.StdSchedulerFactory - [instantiate,1378] - Quartz scheduler version: 2.3.2
+14:45:00.052 [main] INFO  o.q.c.QuartzScheduler - [setJobFactory,2293] - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@a2b54e3
+14:45:00.946 [main] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8080"]
+14:45:01.115 [main] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler quartzScheduler_$_NON_CLUSTERED started.
+14:45:01.122 [main] INFO  c.r.RuoYiApplication - [logStarted,61] - Started RuoYiApplication in 5.173 seconds (JVM running for 5.527)
+14:45:05.827 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[.[/] - [log,173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+15:01:54.733 [schedule-pool-6] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+17:04:17.969 [schedule-pool-11] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+17:06:05.974 [http-nio-8080-exec-89] INFO  c.r.f.w.s.UserDetailsServiceImpl - [loadUserByUsername,43] - 登录用户：saller 不存在.
+17:06:05.989 [schedule-pool-22] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Error][用户不存在/密码错误]
+17:06:51.407 [http-nio-8080-exec-99] INFO  c.r.f.w.s.UserDetailsServiceImpl - [loadUserByUsername,43] - 登录用户：saller 不存在.
+17:06:51.423 [schedule-pool-45] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Error][用户不存在/密码错误]
+17:06:56.439 [http-nio-8080-exec-8] INFO  c.r.f.w.s.UserDetailsServiceImpl - [loadUserByUsername,43] - 登录用户：saller 不存在.
+17:06:56.454 [schedule-pool-46] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Error][用户不存在/密码错误]
+17:07:23.473 [schedule-pool-49] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Error][验证码错误]
+17:07:26.722 [schedule-pool-47] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Success][登录成功]
+17:24:20.229 [schedule-pool-7] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+17:27:17.576 [schedule-pool-12] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+17:28:17.139 [schedule-pool-48] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+17:29:43.894 [schedule-pool-16] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[saller][Success][登录成功]
+17:47:44.231 [schedule-pool-17] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]

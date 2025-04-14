@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ReviewMapper">
+    
+    <resultMap type="Review" id="ReviewResult">
+        <result property="reviewId"    column="review_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="productId"    column="product_id"    />
+        <result property="rating"    column="rating"    />
+        <result property="comment"    column="comment"    />
+        <result property="createdAt"    column="created_at"    />
+    </resultMap>
+
+    <sql id="selectReviewVo">
+        select review_id, user_id, product_id, rating, comment, created_at from review
+    </sql>
+
+    <select id="selectReviewList" parameterType="Review" resultMap="ReviewResult">
+        <include refid="selectReviewVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="rating != null "> and rating = #{rating}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+        </where>
+    </select>
+    
+    <select id="selectReviewByReviewId" parameterType="Long" resultMap="ReviewResult">
+        <include refid="selectReviewVo"/>
+        where review_id = #{reviewId}
+    </select>
+
+    <insert id="insertReview" parameterType="Review" useGeneratedKeys="true" keyProperty="reviewId">
+        insert into review
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="rating != null">rating,</if>
+            <if test="comment != null">comment,</if>
+            <if test="createdAt != null">created_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="rating != null">#{rating},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReview" parameterType="Review">
+        update review
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where review_id = #{reviewId}
+    </update>
+
+    <delete id="deleteReviewByReviewId" parameterType="Long">
+        delete from review where review_id = #{reviewId}
+    </delete>
+
+    <delete id="deleteReviewByReviewIds" parameterType="String">
+        delete from review where review_id in 
+        <foreach item="reviewId" collection="array" open="(" separator="," close=")">
+            #{reviewId}
+        </foreach>
+    </delete>
+</mapper>

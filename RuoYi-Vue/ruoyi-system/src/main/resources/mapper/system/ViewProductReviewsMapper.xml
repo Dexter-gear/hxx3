@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ViewProductReviewsMapper">
+    
+    <resultMap type="ViewProductReviews" id="ViewProductReviewsResult">
+        <result property="reviewId"    column="review_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="productId"    column="product_id"    />
+        <result property="rating"    column="rating"    />
+        <result property="comment"    column="comment"    />
+        <result property="createdAt"    column="created_at"    />
+    </resultMap>
+
+    <sql id="selectViewProductReviewsVo">
+        select review_id, user_id, nick_name, product_id, rating, comment, created_at from view_product_reviews
+    </sql>
+
+    <select id="selectViewProductReviewsList" parameterType="ViewProductReviews" resultMap="ViewProductReviewsResult">
+        <include refid="selectViewProductReviewsVo"/>
+        <where>  
+            <if test="reviewId != null "> and review_id = #{reviewId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="productId != null "> and product_id = #{productId}</if>
+            <if test="rating != null "> and rating = #{rating}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+        </where>
+    </select>
+    
+    <select id="selectViewProductReviewsByReviewId" parameterType="Long" resultMap="ViewProductReviewsResult">
+        <include refid="selectViewProductReviewsVo"/>
+        where review_id = #{reviewId}
+    </select>
+
+    <insert id="insertViewProductReviews" parameterType="ViewProductReviews">
+        insert into view_product_reviews
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reviewId != null">review_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="rating != null">rating,</if>
+            <if test="comment != null">comment,</if>
+            <if test="createdAt != null">created_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reviewId != null">#{reviewId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="productId != null">#{productId},</if>
+            <if test="rating != null">#{rating},</if>
+            <if test="comment != null">#{comment},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateViewProductReviews" parameterType="ViewProductReviews">
+        update view_product_reviews
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="productId != null">product_id = #{productId},</if>
+            <if test="rating != null">rating = #{rating},</if>
+            <if test="comment != null">comment = #{comment},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where review_id = #{reviewId}
+    </update>
+
+    <delete id="deleteViewProductReviewsByReviewId" parameterType="Long">
+        delete from view_product_reviews where review_id = #{reviewId}
+    </delete>
+
+    <delete id="deleteViewProductReviewsByReviewIds" parameterType="String">
+        delete from view_product_reviews where review_id in 
+        <foreach item="reviewId" collection="array" open="(" separator="," close=")">
+            #{reviewId}
+        </foreach>
+    </delete>
+</mapper>
