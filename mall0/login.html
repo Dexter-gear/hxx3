@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>购物车</title>
+    <title>河北平山农特产品商城</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -113,26 +113,13 @@
 
                 <div class="rd-navbar-nav-wrap">
                   <ul class="rd-navbar-nav">
-  <li class="rd-nav-item active"><a class="rd-nav-link" href="./index.html">首页</a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="grid-shop.html">商品列表</a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="cart-page.html">购物车</a>
-                    </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="checkout.html">订单中心</a>
                   </ul>
                 </div>
              <div class="rd-navbar-main-element">
      
                   <!-- RD Navbar Basket-->
                   <div class="rd-navbar-basket-wrap">
-                    <button class="rd-navbar-basket fl-bigmug-line-shopping202" data-rd-navbar-toggle=".cart-inline"><span>2</span></button>
-                    <div class="cart-inline">
-                      <div class="cart-inline-header">
-                        <h5 class="cart-inline-title">购物车:<span> 2</span> 件商品</h5>
-                        <h6 class="cart-inline-title">总价:<span> ¥43</span></h6>
-                      </div>
-                      <div class="cart-inline-body">
+                    <div class="cart-inline"> <div class="cart-inline-body">
                         <div class="cart-inline-item">
                           <div class="unit unit-spacing-sm align-items-center">
                             <div class="unit-left"><a class="cart-inline-figure" href="single-product.html"><img src="images/product-mini-6-100x90.png" alt="" width="100" height="90"/></a></div>
@@ -166,11 +153,6 @@
                           </div>
                         </div>
                       </div>
-                      <div class="cart-inline-footer">
-                        <div class="group-sm"><a class="button button-default-outline-2 button-zakaria" href="cart-page.html">查看购物车</a>
-                      </div>
-                    </div>
-                  </div><a class="rd-navbar-basket rd-navbar-basket-mobile fl-bigmug-line-shopping202 rd-navbar-fixed-element-2" href="cart-page.html"><span>2</span></a>
                   <button class="rd-navbar-project-hamburger rd-navbar-project-hamburger-open rd-navbar-fixed-element-1" type="button" data-multitoggle=".rd-navbar-main" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate" title="项目菜单"><span class="project-hamburger"><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span></span></button>
                 </div>
 
@@ -263,7 +245,7 @@
               <span v-else>登 录 中...</span>
             </el-button>
             <div style="float: right;" v-if="register">
-              <router-link class="link-type" :to="'/register'">立即注册</router-link>
+              <a class="link-type" href="register.html">立即注册</a>
             </div>
           </el-form-item>
         </el-form>
@@ -444,7 +426,7 @@
           },
           loading: false,
           captchaEnabled: true,
-          register: false,
+          register: true,
           redirect: undefined
         };
       },

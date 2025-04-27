@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 订单对象 order
  * 
  * @author hxx
- * @date 2025-04-13
+ * @date 2025-04-26
  */
 public class Order extends BaseEntity
 {
@@ -50,6 +50,10 @@ public class Order extends BaseEntity
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updatedAt;
+
+    /** 地址ID，外键引用 address.address_id */
+    @Excel(name = "地址ID，外键引用 address.address_id")
+    private Long addressId;
 
     public void setOrderId(Long orderId) 
     {
@@ -131,6 +135,16 @@ public class Order extends BaseEntity
         return updatedAt;
     }
 
+    public void setAddressId(Long addressId) 
+    {
+        this.addressId = addressId;
+    }
+
+    public Long getAddressId() 
+    {
+        return addressId;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -142,6 +156,7 @@ public class Order extends BaseEntity
             .append("shippingStatus", getShippingStatus())
             .append("createdAt", getCreatedAt())
             .append("updatedAt", getUpdatedAt())
+            .append("addressId", getAddressId())
             .toString();
     }
 }

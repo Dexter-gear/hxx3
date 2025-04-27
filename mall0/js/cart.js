@@ -127,3 +127,84 @@ export function fetchProduct(productId) {
   }
    
   document.addEventListener("DOMContentLoaded", fetchCartWithProducts);
+
+export function fetchAddressList() {
+  return authorizedFetch("http://localhost:8080/system/user_address/list")
+    .then(data => {
+      if (data.code === 200) {
+        console.log("地址列表:", data);
+        return data.rows;
+      } else {
+        console.error("加载地址列表失败:", data.msg);
+        return [];
+      }
+    })
+    .catch(err => {
+      console.error("请求错误:", err);
+      return [];
+    });
+}
+
+export function submitOrder(addressId) {
+  return authorizedFetch("http://localhost:8080/system/order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      addressId: addressId
+    })
+  })
+    .then(data => {
+      if (data.code === 200) {
+        console.log("订单提交成功:", data);
+        return data;
+      } else {
+        console.error("订单提交失败:", data.msg);
+        throw new Error(data.msg);
+      }
+    })
+    .catch(err => {
+      console.error("请求错误:", err);
+      throw err;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchCartWithProducts();
+  
+  // 加载地址列表
+  fetchAddressList().then(addresses => {
+    const addressSelect = document.getElementById("address-select");
+    if (addressSelect) {
+      addressSelect.innerHTML = '<option value="">请选择收货地址</option>';
+      addresses.forEach(address => {
+        const option = document.createElement("option");
+        option.value = address.addressId;
+        option.textContent = address.address;
+        addressSelect.appendChild(option);
+      });
+    }
+  });
+
+  // 提交订单按钮点击事件
+  const submitOrderBtn = document.getElementById("submit-order");
+  if (submitOrderBtn) {
+    submitOrderBtn.addEventListener("click", () => {
+      const addressSelect = document.getElementById("address-select");
+      if (!addressSelect || !addressSelect.value) {
+        alert("请选择收货地址");
+        return;
+      }
+
+      submitOrder(addressSelect.value)
+        .then(() => {
+          alert("订单提交成功！");
+          window.location.href = "checkout.html";
+        })
+        .catch(error => {
+          alert("订单提交失败：" + error.message);
+        });
+    });
+  }
+});

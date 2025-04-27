@@ -33,6 +33,14 @@
           placeholder="请选择更新时间">
         </el-date-picker>
       </el-form-item>
+      <el-form-item label="地址ID，外键引用 address.address_id" prop="addressId">
+        <el-input
+          v-model="queryParams.addressId"
+          placeholder="请输入地址ID，外键引用 address.address_id"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -103,6 +111,7 @@
           <span>{{ parseTime(scope.row.updatedAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="地址ID，外键引用 address.address_id" align="center" prop="addressId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -156,6 +165,9 @@
             placeholder="请选择更新时间">
           </el-date-picker>
         </el-form-item>
+        <el-form-item label="地址ID，外键引用 address.address_id" prop="addressId">
+          <el-input v-model="form.addressId" placeholder="请输入地址ID，外键引用 address.address_id" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -200,7 +212,8 @@ export default {
         paymentStatus: null,
         shippingStatus: null,
         createdAt: null,
-        updatedAt: null
+        updatedAt: null,
+        addressId: null
       },
       // 表单参数
       form: {},
@@ -252,7 +265,8 @@ export default {
         paymentStatus: null,
         shippingStatus: null,
         createdAt: null,
-        updatedAt: null
+        updatedAt: null,
+        addressId: null
       };
       this.resetForm("form");
     },

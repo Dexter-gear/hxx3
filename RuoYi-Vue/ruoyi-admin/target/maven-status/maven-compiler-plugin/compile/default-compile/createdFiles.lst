@@ -1,6 +1,7 @@
 com/ruoyi/web/controller/monitor/CacheController.class
 com/ruoyi/system/controller/ViewProductReviewsController.class
 com/ruoyi/system/controller/OrderController.class
+com/ruoyi/system/controller/AddressController.class
 com/ruoyi/web/controller/system/SysProfileController.class
 com/ruoyi/web/controller/system/SysMenuController.class
 com/ruoyi/web/controller/monitor/SysOperlogController.class
@@ -11,6 +12,7 @@ com/ruoyi/web/controller/tool/TestController.class
 com/ruoyi/web/controller/monitor/SysUserOnlineController.class
 com/ruoyi/system/controller/ReviewController.class
 com/ruoyi/web/controller/monitor/ServerController.class
+com/ruoyi/system/controller/UserAddressController.class
 com/ruoyi/web/controller/monitor/SysLogininforController.class
 com/ruoyi/web/controller/system/SysConfigController.class
 com/ruoyi/web/controller/system/SysRegisterController.class

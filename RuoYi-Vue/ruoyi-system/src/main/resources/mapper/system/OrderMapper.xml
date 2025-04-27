@@ -13,10 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="shippingStatus"    column="shipping_status"    />
         <result property="createdAt"    column="created_at"    />
         <result property="updatedAt"    column="updated_at"    />
+        <result property="addressId"    column="address_id"    />
     </resultMap>
 
     <sql id="selectOrderVo">
-        select order_id, user_id, total_amount, status, payment_status, shipping_status, created_at, updated_at from `order`
+        select order_id, user_id, total_amount, status, payment_status, shipping_status, created_at, updated_at, address_id from `order`
     </sql>
 
     <select id="selectOrderList" parameterType="Order" resultMap="OrderResult">
@@ -29,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shippingStatus != null  and shippingStatus != ''"> and shipping_status = #{shippingStatus}</if>
             <if test="createdAt != null "> and created_at = #{createdAt}</if>
             <if test="updatedAt != null "> and updated_at = #{updatedAt}</if>
+            <if test="addressId != null "> and address_id = #{addressId}</if>
         </where>
     </select>
     
@@ -47,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shippingStatus != null and shippingStatus != ''">shipping_status,</if>
             <if test="createdAt != null">created_at,</if>
             <if test="updatedAt != null">updated_at,</if>
+            <if test="addressId != null">address_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
@@ -56,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shippingStatus != null and shippingStatus != ''">#{shippingStatus},</if>
             <if test="createdAt != null">#{createdAt},</if>
             <if test="updatedAt != null">#{updatedAt},</if>
+            <if test="addressId != null">#{addressId},</if>
          </trim>
     </insert>
 
@@ -69,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="shippingStatus != null and shippingStatus != ''">shipping_status = #{shippingStatus},</if>
             <if test="createdAt != null">created_at = #{createdAt},</if>
             <if test="updatedAt != null">updated_at = #{updatedAt},</if>
+            <if test="addressId != null">address_id = #{addressId},</if>
         </trim>
         where order_id = #{orderId}
     </update>

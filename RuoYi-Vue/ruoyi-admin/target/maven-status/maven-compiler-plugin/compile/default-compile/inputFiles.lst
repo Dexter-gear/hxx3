@@ -23,9 +23,11 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/OrderController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/RuoYiServletInitializer.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/SysLogininforController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/AddressController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/core/config/SwaggerConfig.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysRoleController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysConfigController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/RuoYiApplication.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysDictDataController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/UserAddressController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/SysUserOnlineController.java

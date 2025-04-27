@@ -20,19 +20,17 @@ import com.ruoyi.system.domain.Order;
 import com.ruoyi.system.service.IOrderService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
-import javax.servlet.http.HttpServletRequest;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
-import java.util.Map;
-import java.util.HashMap;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 订单Controller
  * 
  * @author hxx
- * @date 2025-04-13
+ * @date 2025-04-26
  */
 @RestController
 @RequestMapping("/system/order")
@@ -41,29 +39,9 @@ public class OrderController extends BaseController
     @Autowired
     private IOrderService orderService;
     @Autowired
-    private HttpServletRequest request;
-    @Autowired
     private TokenService tokenService;
-
-    /**
-     * 查询订单列表by ID
-     */
-    @PreAuthorize("@ss.hasPermi('system:order:list')")
-    @GetMapping("/userlist")
-    public TableDataInfo userlist(Order order)
-    {
-        // 从请求头中获取 token
-        String token = request.getHeader("Authorization");
-        // 解析 token 获取登录用户信息
-        LoginUser loginUser = tokenService.getLoginUser(request);
-        // 获取当前的用户名称
-        Long userId = loginUser.getUserId();
-        order.setUserId(userId);
-        
-        startPage();
-        List<Order> list = orderService.selectOrderList(order);
-        return getDataTable(list);
-    }
+    @Autowired
+    private HttpServletRequest request;
 
     /**
      * 查询订单列表
@@ -72,10 +50,18 @@ public class OrderController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Order order)
     {
+        // 从请求头中获取 token
+        String token = request.getHeader("Authorization");
+        // 解析 token 获取登录用户信息
+        LoginUser loginUser = tokenService.getLoginUser(request);
+        // 获取当前的用户名称
+        Long userId = loginUser.getUserId();
+        order.setUserId(userId);    
         startPage();
         List<Order> list = orderService.selectOrderList(order);
         return getDataTable(list);
     }
+
     /**
      * 导出订单列表
      */
@@ -114,15 +100,7 @@ public class OrderController extends BaseController
         // 获取当前的用户名称
         Long userId = loginUser.getUserId();
         order.setUserId(userId);
-         int result = orderService.insertOrder(order);
-    if (result > 0) {
-        // 返回成功结果，并附带订单ID
-        Map<String, Object> data = new HashMap<>();
-        data.put("orderId", order.getOrderId());
-        return AjaxResult.success("订单创建成功", data);
-    } else {
-        return AjaxResult.error("订单创建失败");
-    }
+        return toAjax(orderService.insertOrder(order));
     }
 
     /**

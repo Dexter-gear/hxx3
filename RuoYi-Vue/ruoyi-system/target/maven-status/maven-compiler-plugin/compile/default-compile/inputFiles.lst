@@ -4,6 +4,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysRoleMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysNotice.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/ISysDictDataService.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/Address.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/SysRoleServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/Cart.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysRoleDept.java
@@ -18,6 +19,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/ICartService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/SysNoticeServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/IOrderDetailService.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/IAddressService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysNoticeMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysCache.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysDictTypeMapper.java
@@ -31,11 +33,14 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/ISysRoleService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysLogininforMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/ReviewMapper.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/AddressServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/ProductServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysPostMapper.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/IUserAddressService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/ISysMenuService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/SysDeptServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysPost.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/UserAddressServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysUserOnline.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/OrderDetailMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/ProductCategoryServiceImpl.java
@@ -43,6 +48,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/vo/RouterVo.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/OrderServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/ViewProductReviews.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/UserAddressMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/ISysLogininforService.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/SysConfigServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/SysLogininforServiceImpl.java
@@ -59,6 +65,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/Review.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysUserRole.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysLogininfor.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/UserAddress.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysConfigMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/service/impl/OrderDetailServiceImpl.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysConfig.java
@@ -78,3 +85,4 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/domain/SysRoleMenu.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysDeptMapper.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/SysRoleDeptMapper.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-system/src/main/java/com/ruoyi/system/mapper/AddressMapper.java
