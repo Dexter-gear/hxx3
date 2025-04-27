@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const imagePreview = document.getElementById('imagePreview');
   const categorySelect = document.getElementById('product-category');
   
+  // 图片上传相关变量
+  let currentFile = null;
+  let imageUrl = null;
+  const maxFileSize = 5 * 1024 * 1024; // 5MB
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  
   // 从URL获取商品ID
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -24,50 +30,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   
-  // 获取商品类别列表
-  try {
-    const response = await authorizedFetch("http://localhost:8080/system/category/list", {
-      method: 'GET'
-    });
-    
-    if (response.code === 200) {
-      const categories = response.rows;
-      categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category.categoryId;
-        option.textContent = category.name;
-        categorySelect.appendChild(option);
-      });
-    } else {
-      console.error('获取商品类别失败:', response.msg);
-    }
-  } catch (error) {
-    console.error('获取商品类别时出错:', error);
-  }
-  
   // 获取商品信息
   try {
+    console.log('开始获取商品信息');
     const response = await authorizedFetch(`http://localhost:8080/system/product/${productId}`, {
       method: 'GET'
     });
     
     if (response.code === 200) {
       const product = response.data;
-      // 填充表单
-      document.getElementById('product-category').value = product.categoryId;
-      document.getElementById('product-name').value = product.name;
-      document.getElementById('product-price').value = product.price;
-      document.getElementById('product-description').value = product.description;
-      document.getElementById('product-quality').value = product.qualityLevel;
-      document.getElementById('product-stock').value = product.stock;
-      document.getElementById('product-status').value = product.pStatus;
+      console.log('获取到的商品信息:', product);
       
-      // 显示现有图片
-      if (product.imageUrl) {
-        previewImg.src = product.imageUrl;
-        previewImg.style.display = 'block';
-        removeButton.style.display = 'inline-block';
-        imageUrl = product.imageUrl;
+      // 获取商品类别列表
+      const categoryResponse = await authorizedFetch("http://localhost:8080/system/category/list", {
+        method: 'GET'
+      });
+      
+      if (categoryResponse.code === 200) {
+        const categories = categoryResponse.rows;
+        categories.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category.categoryId;
+          option.textContent = category.name;
+          categorySelect.appendChild(option);
+        });
+        
+        // 填充表单
+        document.getElementById('product-category').value = product.categoryId;
+        document.getElementById('product-name').value = product.name;
+        document.getElementById('product-price').value = product.price;
+        document.getElementById('product-description').value = product.description;
+        document.getElementById('product-quality').value = product.qualityLevel;
+        document.getElementById('product-stock').value = product.stock;
+        document.getElementById('product-status').value = product.pStatus;
+        
+        // 显示现有图片
+        if (product.imageUrl) {
+          previewImg.src = product.imageUrl;
+          previewImg.style.display = 'block';
+          removeButton.style.display = 'inline-block';
+          imageUrl = product.imageUrl;
+        }
+      } else {
+        console.error('获取商品类别失败:', categoryResponse.msg);
       }
     } else {
       alert('获取商品信息失败：' + response.msg);
@@ -78,12 +83,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     alert('获取商品信息失败，请稍后重试');
     window.location.href = 'product.html';
   }
-  
-  // 图片上传相关变量
-  let currentFile = null;
-  let imageUrl = null;
-  const maxFileSize = 5 * 1024 * 1024; // 5MB
-  const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
   
   // 选择图片按钮点击事件
   if (uploadButton) {

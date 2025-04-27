@@ -214,9 +214,6 @@ function renderOrders(orders) {
                 完成订单
               </button>
             ` : ''}
-            <button class="button button-primary" onclick="window.location.href='order-detail.html?orderId=${orderId}'">
-              查看详情
-            </button>
           </div>
         </div>
         <div class="order-address">

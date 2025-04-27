@@ -118,27 +118,27 @@
     </el-row>
 
     <el-table v-loading="loading" :data="productList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="商品ID" align="center" prop="productId" />
-      <el-table-column label="商品类别ID" align="center" prop="categoryId" />
-      <el-table-column label="商品名称" align="center" prop="name" />
-      <el-table-column label="商品描述" align="center" prop="description" />
-      <el-table-column label="商品价格" align="center" prop="price" />
-      <el-table-column label="品质等级" align="center" prop="qualityLevel" />
-      <el-table-column label="库存数量" align="center" prop="stock" />
-      <el-table-column label="商品图片URL" align="center" prop="imageUrl" />
-      <el-table-column label="创建时间" align="center" prop="createdAt" width="180">
+      <el-table-column type="selection" width="45" align="center" />
+      <el-table-column label="商品ID" align="center" prop="productId" width="80" />
+      <el-table-column label="商品类别ID" align="center" prop="categoryId" width="100" />
+      <el-table-column label="商品名称" align="center" prop="name" min-width="120" />
+      <el-table-column label="商品描述" align="left" prop="description" min-width="400"  />
+      <el-table-column label="商品价格" align="center" prop="price" width="100" />
+      <el-table-column label="品质等级" align="center" prop="qualityLevel" width="100" />
+      <el-table-column label="库存数量" align="center" prop="stock" width="100" />
+      <el-table-column label="商品图片URL" align="center" prop="imageUrl" min-width="150" show-overflow-tooltip />
+      <el-table-column label="创建时间" align="center" prop="createdAt" width="120">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createdAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="更新时间" align="center" prop="updatedAt" width="180">
+      <el-table-column label="更新时间" align="center" prop="updatedAt" width="120">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.updatedAt, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="上下架状态" align="center" prop="pStatus" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="上下架状态" align="center" prop="pStatus" width="100" />
+      <el-table-column label="操作" align="center" width="120" fixed="right">
         <template slot-scope="scope">
           <el-button
             size="mini"

@@ -14,6 +14,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function fetchOrderDetail(orderId) {
   try {
+    // 先获取订单数据
+    const orderResponse = await authorizedFetch(`http://localhost:8080/system/order/${orderId}`);
+    if (!orderResponse || orderResponse.code !== 200) {
+      console.error("获取订单数据失败：", orderResponse);
+      renderOrderDetail(null);
+      return;
+    }
+    
+    const orderData = orderResponse.data;
+    
+    // 如果订单已付款，直接渲染订单详情
+    if (orderData.paymentStatus === 1) {
+      renderOrderDetail({
+        ...orderData,
+        details: []
+      });
+      return;
+    }
+    
     // 请求所有订单详情列表
     const response = await authorizedFetch(`http://localhost:8080/system/detail/list`);
     console.log("订单详情列表响应：", response);
@@ -44,7 +63,7 @@ async function fetchOrderDetail(orderId) {
     
     // 将产品信息添加到订单详情中
     const orderWithProducts = {
-      orderId: orderId,
+      ...orderData,
       details: orderDetails.map((detail, index) => ({
         ...detail,
         productInfo: products[index]
@@ -73,6 +92,9 @@ async function fetchProductInfo(productId) {
 
 function renderOrderDetail(order) {
   const orderDetailContainer = document.getElementById("order-detail");
+  const paymentButton = document.getElementById("payment-button");
+  const paymentQrcode = document.getElementById("payment-qrcode");
+  
   if (!orderDetailContainer) {
     console.error("找不到订单详情容器元素");
     return;
@@ -80,6 +102,8 @@ function renderOrderDetail(order) {
 
   if (!order) {
     orderDetailContainer.innerHTML = "<p>未找到订单信息</p>";
+    paymentButton.style.display = "none";
+    paymentQrcode.style.display = "none";
     return;
   }
 
@@ -122,4 +146,42 @@ function renderOrderDetail(order) {
   `;
 
   orderDetailContainer.innerHTML = orderDetailHtml;
+  
+  // 根据paymentStatus决定是否显示付款按钮和二维码
+  if (order.paymentStatus === 1) {
+    paymentButton.style.display = "none";
+    paymentQrcode.style.display = "none";
+  } else {
+    paymentButton.style.display = "inline-block";
+    paymentQrcode.style.display = "block";
+  }
+  
+  // 添加付款按钮点击事件
+  paymentButton.onclick = async () => {
+    try {
+      const response = await authorizedFetch(`http://localhost:8080/system/order`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          orderId: orderId,
+          paymentStatus: 1
+        })
+      });
+      
+      if (response && response.code === 200) {
+        alert('付款状态更新成功！');
+        paymentButton.disabled = true;
+        paymentButton.textContent = '已付款';
+        paymentButton.style.display = "none";
+        paymentQrcode.style.display = "none";
+      } else {
+        alert('付款状态更新失败，请稍后重试');
+      }
+    } catch (error) {
+      console.error('更新付款状态失败：', error);
+      alert('付款状态更新失败，请稍后重试');
+    }
+  };
 }
