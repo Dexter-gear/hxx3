@@ -261,14 +261,35 @@
       .order-header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 15px;
         padding-bottom: 10px;
         border-bottom: 1px solid #eee;
       }
-      .order-header span {
-        margin-right: 20px;
+      .order-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .order-info span {
         color: #333;
+      }
+      .order-status {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 0 20px;
+      }
+      .status-item {
+        color: #666;
+        font-size: 14px;
+      }
+      .order-address {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 4px;
+        color: #666;
       }
       .button-primary {
         background-color: #4CAF50;
@@ -283,18 +304,37 @@
       .button-primary:hover {
         background-color: #45a049;
       }
+      .order-detail-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+      .order-detail-item:last-child {
+        border-bottom: none;
+      }
+      .detail-info {
+        margin-left: 15px;
+      }
+      .detail-info h5 {
+        margin: 0 0 5px 0;
+        color: #333;
+      }
+      .detail-info p {
+        margin: 0;
+        color: #666;
+        font-size: 14px;
+      }
       @media (max-width: 768px) {
         .order-header {
           flex-direction: column;
-          align-items: flex-start;
-          gap: 10px;
+          gap: 15px;
         }
-        .order-header span {
-          margin-right: 0;
+        .order-status {
+          margin: 10px 0;
         }
         .button-primary {
           width: 100%;
-          margin-top: 10px;
         }
       }
     </style>

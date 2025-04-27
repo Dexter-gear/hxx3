@@ -1,22 +1,54 @@
 import { authorizedFetch } from "./request.js";
 
-document.addEventListener("DOMContentLoaded", async function() {
+// 获取用户关联的商品ID列表
+async function getUserProductIds() {
   try {
-    // 获取产品列表
-    const response = await authorizedFetch("http://localhost:8080/system/product/list");
-    
-    if (response && response.code === 200) {
-      renderProductList(response.rows);
-    } else {
-      console.error("获取产品列表失败");
-      document.getElementById("product-list").innerHTML = "<p>获取产品列表失败</p>";
+    const response = await authorizedFetch('http://localhost:8080/system/saller_product/list');
+    if (response.code === 200 && response.rows) {
+      return response.rows.map(item => item.productId);
     }
+    return [];
   } catch (error) {
-    console.error("获取产品列表出错：", error);
-    document.getElementById("product-list").innerHTML = "<p>获取产品列表出错</p>";
+    console.error('获取用户关联商品失败：', error);
+    return [];
   }
-});
+}
 
+// 全局变量存储所有商品和用户关联的商品ID
+let allProducts = [];
+let userProductIds = [];
+
+// 根据分类筛选商品
+function filterProductsByCategory(categoryId) {
+  // 首先过滤出用户关联的商品
+  let filteredProducts = allProducts.filter(product => 
+    userProductIds.includes(product.productId)
+  );
+
+  // 如果选择了分类，进一步按分类筛选
+  if (categoryId) {
+    filteredProducts = filteredProducts.filter(product => 
+      product.categoryId === parseInt(categoryId)
+    );
+  }
+
+  if (filteredProducts.length === 0) {
+    const productList = document.getElementById('product-list');
+    if (productList) {
+      productList.innerHTML = `
+        <div class="col-12 text-center">
+          <div class="alert alert-info" role="alert">
+            ${categoryId ? '该分类下没有您的商品' : '您还没有关联任何商品'}
+          </div>
+        </div>
+      `;
+    }
+  } else {
+    renderProductList(filteredProducts);
+  }
+}
+
+// 渲染商品列表
 function renderProductList(products) {
   const productListContainer = document.getElementById("product-list");
   if (!productListContainer) return;
@@ -84,7 +116,8 @@ window.toggleProductStatus = async function(productId, currentStatus) {
       // 重新加载产品列表
       const listResponse = await authorizedFetch("http://localhost:8080/system/product/list");
       if (listResponse && listResponse.code === 200) {
-        renderProductList(listResponse.rows);
+        allProducts = listResponse.rows;
+        filterProductsByCategory(null); // 重新应用筛选
       }
     } else {
       alert('更新产品状态失败');
@@ -94,3 +127,39 @@ window.toggleProductStatus = async function(productId, currentStatus) {
     alert('更新产品状态出错');
   }
 };
+
+// 导出筛选函数供其他模块使用
+export function filterByCategory(categoryId) {
+  filterProductsByCategory(categoryId);
+}
+
+// 初始化加载
+document.addEventListener("DOMContentLoaded", async function() {
+  try {
+    // 获取用户关联的商品ID列表
+    userProductIds = await getUserProductIds();
+    console.log('用户关联的商品ID：', userProductIds);
+    
+    // 获取所有商品
+    const response = await authorizedFetch("http://localhost:8080/system/product/list");
+    if (response && response.code === 200) {
+      allProducts = response.rows;
+      // 初始显示所有关联商品
+      filterProductsByCategory(null);
+    } else {
+      throw new Error(response.msg || '获取数据失败');
+    }
+  } catch (error) {
+    console.error('获取产品列表失败：', error);
+    const productList = document.getElementById('product-list');
+    if (productList) {
+      productList.innerHTML = `
+        <div class="col-12 text-center">
+          <div class="alert alert-danger" role="alert">
+            获取产品列表失败：${error.message}
+          </div>
+        </div>
+      `;
+    }
+  }
+});

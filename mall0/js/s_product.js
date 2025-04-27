@@ -7,10 +7,12 @@ function getURLParameter(name) {
   }
   
   // 获取产品信息的函数
-  function fetchProductInfo(productId) {
-    authorizedFetch(`http://localhost:8080/system/product/${productId}`)
-      .then(data => {
-    const s = data.data;
+  async function fetchProductInfo(productId) {
+    try {
+      const response = await authorizedFetch(`http://localhost:8080/system/view_product_user/${productId}`);
+      if (response.code === 200) {
+        const s = response.data;
+        
         // 构建 HTML 内容
         const productInfoHtml = `
           <h4 class="product-big-title">${s.name}</h4>
@@ -28,8 +30,9 @@ function getURLParameter(name) {
            </div>
           <hr class="hr-gray-100">
           <ul class="list list-description">
-            <li><span>库存:</span><span>${s.stock }</span></li>
+            <li><span>库存:</span><span>${s.stock}</span></li>
             <li><span>等级:</span><span>${s.qualityLevel}</span></li>
+            <li><span>卖家:</span><span>${s.nickName || '未知卖家'}</span></li>
           </ul>
           <div class="group-xs group-middle">
             <div><a class="button button-lg button-secondary button-zakaria add-to-cart-btn" data-product-id=${s.productId}>加入购物车</a></div>
@@ -52,10 +55,20 @@ function getURLParameter(name) {
         // 将生成的 HTML 内容插入到 id 为 product-info 的 div 中
         document.getElementById('product-info').innerHTML = productInfoHtml;
         bindAddToCartEvents();
-      })
-      .catch(error => {
-        console.error('请求出错:', error);
-      });
+      } else {
+        throw new Error(response.msg || '获取商品详情失败');
+      }
+    } catch (error) {
+      console.error('请求出错:', error);
+      const productInfo = document.getElementById('product-info');
+      if (productInfo) {
+        productInfo.innerHTML = `
+          <div class="alert alert-danger" role="alert">
+            获取商品详情失败：${error.message}
+          </div>
+        `;
+      }
+    }
   }
   
   // 渲染星级评分

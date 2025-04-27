@@ -45,9 +45,9 @@ function renderCartPreview() {
                   <h6 class="cart-inline-name"><a href="single-product.html">${product.name}</a></h6>
                     <div class="group-xs group-middle">
                       <div class="table-cart-stepper">
-                        <span>${quantity}</span>
+                        <span>${quantity}kg</span>
                       </div>
-                      <h6 class="cart-inline-title">¥${product.price.toFixed(2)}</h6>
+                      <h6 class="cart-inline-title">${product.price.toFixed(2)}元/kg</h6>
                   </div>
                 </div>
               </div>

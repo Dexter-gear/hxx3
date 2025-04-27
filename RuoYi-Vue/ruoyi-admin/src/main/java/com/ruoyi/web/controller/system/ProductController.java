@@ -20,7 +20,11 @@ import com.ruoyi.system.domain.Product;
 import com.ruoyi.system.service.IProductService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
-
+import com.ruoyi.framework.web.service.TokenService;
+import com.ruoyi.common.core.domain.model.LoginUser;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 /**
  * 商品Controller
  * 
@@ -33,6 +37,10 @@ public class ProductController extends BaseController
 {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private TokenService tokenService;
 
     /**
      * 查询商品列表
@@ -77,7 +85,14 @@ public class ProductController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody Product product)
     {
-        return toAjax(productService.insertProduct(product));
+          int result = productService.insertProduct(product);
+     if (result > 0) {
+         Map<String, Object> data = new HashMap<>();
+         data.put("productId", product.getProductId());
+         return AjaxResult.success("商品创建成功", data);
+     } else {
+         return AjaxResult.error("商品创建失败");
+     }
     }
 
     /**

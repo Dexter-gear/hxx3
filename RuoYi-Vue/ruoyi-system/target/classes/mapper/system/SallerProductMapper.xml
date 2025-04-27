@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SallerProductMapper">
+    
+    <resultMap type="SallerProduct" id="SallerProductResult">
+        <result property="userId"    column="user_id"    />
+        <result property="productId"    column="product_id"    />
+    </resultMap>
+
+    <sql id="selectSallerProductVo">
+        select user_id, product_id from saller_product
+    </sql>
+
+    <select id="selectSallerProductList" parameterType="SallerProduct" resultMap="SallerProductResult">
+        <include refid="selectSallerProductVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="productId != null "> and product_id = #{productId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSallerProductByUserId" parameterType="Long" resultMap="SallerProductResult">
+        <include refid="selectSallerProductVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertSallerProduct" parameterType="SallerProduct">
+        insert into saller_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="productId != null">product_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="productId != null">#{productId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSallerProduct" parameterType="SallerProduct">
+        update saller_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productId != null">product_id = #{productId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteSallerProductByUserId" parameterType="Long">
+        delete from saller_product where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteSallerProductByUserIds" parameterType="String">
+        delete from saller_product where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

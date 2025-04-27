@@ -63,6 +63,7 @@ export function fetchProduct(productId) {
             const unitPrice = product.price;
             const subtotal = unitPrice * quantity;
             total += subtotal;
+            const stock = product.stock || 1;
   
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -72,19 +73,21 @@ export function fetchProduct(productId) {
                 </a>
                 <a class="table-cart-link" href="single-product.html">${product.name}</a>
               </td>
-              <td>¥${unitPrice.toFixed(2)}</td>
+              <td>${unitPrice.toFixed(2)}元/kg</td>
               <td>
                 <div class="table-cart-stepper">
-                  <input class="form-input quantity-input" type="number" value="${quantity}" min="1" max="1000" title="商品数量" data-cart-id="${item.cartId}">
+                  <input class="form-input quantity-input" type="number" value="${quantity}" min="1" max="${stock}" title="商品数量(kg)" data-cart-id="${item.cartId}" data-stock="${stock}">
                 </div>
               </td>
               <td>¥${subtotal.toFixed(2)}</td>
+              <td><button class="btn-delete-cart" data-cart-id="${item.cartId}">删除</button></td>
             `;
             tbody.appendChild(row);
           });
   
           totalElement.textContent = `¥${total.toFixed(2)}`;
           bindQuantityChangeEvents();
+          bindDeleteCartEvents();
         })
         .catch(err => {
           console.error("获取产品信息时发生错误:", err);
@@ -118,15 +121,67 @@ export function fetchProduct(productId) {
     inputs.forEach(input => {
       input.addEventListener("change", (event) => {
         const cartId = input.dataset.cartId;
-        const newQuantity = parseInt(input.value, 10);
+        const stock = parseInt(input.dataset.stock, 10) || 1;
+        let newQuantity = parseInt(input.value, 10);
+        if (newQuantity > stock) {
+          alert("不能超过库存容量！");
+          input.value = stock;
+          newQuantity = stock;
+        }
         if (cartId && newQuantity > 0) {
           updateCartQuantity(cartId, newQuantity);
         }
       });
     });
   }
+
+  function bindDeleteCartEvents() {
+    const btns = document.querySelectorAll(".btn-delete-cart");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const cartId = btn.dataset.cartId;
+        if (cartId) {
+          if (confirm("确定要删除该商品吗？")) {
+            deleteCartItem(cartId);
+          }
+        }
+      });
+    });
+  }
+
+  function deleteCartItem(cartId) {
+    authorizedFetch(`http://localhost:8080/system/cart/${cartId}`, {
+      method: "DELETE"
+    })
+      .then(data => {
+        if (data.code === 200) {
+          fetchCartWithProducts();
+        } else {
+          alert("删除失败：" + data.msg);
+        }
+      })
+      .catch(err => {
+        alert("请求错误：" + err);
+      });
+  }
    
-  document.addEventListener("DOMContentLoaded", fetchCartWithProducts);
+  document.addEventListener("DOMContentLoaded", () => {
+    fetchCartWithProducts();
+    
+    // 加载地址列表
+    fetchAddressList().then(addresses => {
+      const addressSelect = document.getElementById("address-select");
+      if (addressSelect) {
+        addressSelect.innerHTML = '<option value="">请选择收货地址</option>';
+        addresses.forEach(address => {
+          const option = document.createElement("option");
+          option.value = address.addressId;
+          option.textContent = address.address;
+          addressSelect.appendChild(option);
+        });
+      }
+    });
+  });
 
 export function fetchAddressList() {
   return authorizedFetch("http://localhost:8080/system/user_address/list")
@@ -144,67 +199,3 @@ export function fetchAddressList() {
       return [];
     });
 }
-
-export function submitOrder(addressId) {
-  return authorizedFetch("http://localhost:8080/system/order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      addressId: addressId
-    })
-  })
-    .then(data => {
-      if (data.code === 200) {
-        console.log("订单提交成功:", data);
-        return data;
-      } else {
-        console.error("订单提交失败:", data.msg);
-        throw new Error(data.msg);
-      }
-    })
-    .catch(err => {
-      console.error("请求错误:", err);
-      throw err;
-    });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchCartWithProducts();
-  
-  // 加载地址列表
-  fetchAddressList().then(addresses => {
-    const addressSelect = document.getElementById("address-select");
-    if (addressSelect) {
-      addressSelect.innerHTML = '<option value="">请选择收货地址</option>';
-      addresses.forEach(address => {
-        const option = document.createElement("option");
-        option.value = address.addressId;
-        option.textContent = address.address;
-        addressSelect.appendChild(option);
-      });
-    }
-  });
-
-  // 提交订单按钮点击事件
-  const submitOrderBtn = document.getElementById("submit-order");
-  if (submitOrderBtn) {
-    submitOrderBtn.addEventListener("click", () => {
-      const addressSelect = document.getElementById("address-select");
-      if (!addressSelect || !addressSelect.value) {
-        alert("请选择收货地址");
-        return;
-      }
-
-      submitOrder(addressSelect.value)
-        .then(() => {
-          alert("订单提交成功！");
-          window.location.href = "checkout.html";
-        })
-        .catch(error => {
-          alert("订单提交失败：" + error.message);
-        });
-    });
-  }
-});

@@ -19,6 +19,22 @@ export function renderProducts(products) {
     // 如果 imageUrl 为空，则设置默认图片路径
     var imgSrc = product.imageUrl ? product.imageUrl : 'images/default.png';
 
+    // 判断库存状态
+    const isOutOfStock = product.stock === 0;
+    const stockStatus = isOutOfStock ? '<span class="out-of-stock">已售罄</span>' : '';
+    const buttons = isOutOfStock 
+      ? '' // 库存为0时，不显示任何按钮
+      : `
+        <div class="product-button-wrap">
+          <div class="product-button">
+            <a class="button button-secondary" href="single-product.html?product_id=${product.productId}" title="查看详情">🔍</a>
+          </div>
+          <div class="product-button">
+            <a class="button button-primary add-to-cart-btn" data-product-id="${product.productId}" title="加入购物车">🛒</a>
+          </div>
+        </div>
+      `;
+
     // 构造产品卡片的HTML
     var html = `
       <div class="col-sm-6 col-md-4 col-lg-6 col-xl-4">
@@ -27,22 +43,16 @@ export function renderProducts(products) {
           <div class="product-body">
             <div class="product-figure">
               <img src="${imgSrc}" alt="${product.name}" width="220" height="160"/>
+              ${stockStatus}
             </div>
             <h5 class="product-title">
               <a href="single-product.html?product_id=${product.productId}">${product.name}</a>
             </h5>
             <div class="product-price-wrap">
-              <div class="product-price">¥${product.price}</div>
+              <div class="product-price">${product.price}元/kg</div>
             </div>
           </div>
-          <div class="product-button-wrap">
-            <div class="product-button">
-              <a class="button button-secondary" href="single-product.html?product_id=${product.productId}" title="查看详情">🔍</a>
-            </div>
-            <div class="product-button">
-              <a class="button button-primary add-to-cart-btn" data-product-id="${product.productId}" title="加入购物车">🛒</a>
-            </div>
-          </div>
+          ${buttons}
         </article>
       </div>
     `;

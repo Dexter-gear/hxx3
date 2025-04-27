@@ -6,14 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submit-order");
     if (submitButton) {
       submitButton.addEventListener("click", function (event) {
-        submitOrder();
+        const addressSelect = document.getElementById("address-select");
+        if (!addressSelect || !addressSelect.value) {
+          alert("请选择收货地址");
+          return;
+        }
+        submitOrder(addressSelect.value);
       });
     }
   });
   
-
-  
-    async function submitOrder() {
+async function submitOrder(addressId) {
     fetchCart().then(cartItems => {
       if (cartItems.length === 0) {
         window.alert("购物车为空，无法提交订单！");
@@ -33,11 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: JSON.stringify({
           totalAmount: totalValue,
+          addressId: addressId
         })
       })
-      .then(async order => {
-        const orderId = order.data.orderId;
-        if (!orderId) throw new Error("订单创建失败");
+      .then(async response => {
+        if (response.code !== 200) {
+          throw new Error(response.msg || "订单创建失败");
+        }
+
+        const orderId = response.data.orderId;
 
         // 第二步：批量获取所有商品的详情（含 price），并合并到 cartItems 中
         const enrichedCartItems = await Promise.all(
@@ -64,17 +71,41 @@ document.addEventListener("DOMContentLoaded", function () {
           })
         );
 
-        await Promise.all(detailPromises);
-        console.log("✅ 所有订单详情已提交");
-        console.log('cartItems',cartItems);
+        const detailResults = await Promise.all(detailPromises);
+        const hasError = detailResults.some(result => result.code !== 200);
+        if (hasError) {
+          throw new Error("订单详情提交失败");
+        }
 
-        // // 第四步：提示 & 清空购物车
-        // window.alert("订单提交成功！");
-        // clearCart(cartItems);
+        // 第四步：获取每个商品的卖家信息并创建卖家-订单关联
+        const sellerPromises = enrichedCartItems.map(async (item) => {
+          // 获取商品信息（包含卖家ID）
+          const productResponse = await authorizedFetch(`http://localhost:8080/system/view_product_user/${item.productId}`);
+          if (productResponse.code === 200) {
+            const sellerId = productResponse.data.userId;
+            // 创建卖家-订单关联
+            return authorizedFetch("http://localhost:8080/system/saller_order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                orderId: orderId,
+                userId: sellerId
+              })
+            });
+          }
+        });
+
+        await Promise.all(sellerPromises);
+
+        console.log("✅ 所有订单详情和卖家关联已提交");
+        console.log('cartItems', cartItems);
+
+        window.alert("订单提交成功！");
+        window.location.href = "checkout.html";
       })
       .catch(error => {
         console.error("❌ 提交订单失败：", error);
-        window.alert("提交订单失败，请稍后重试。");
+        window.alert("提交订单失败：" + error.message);
       });
     });
   }

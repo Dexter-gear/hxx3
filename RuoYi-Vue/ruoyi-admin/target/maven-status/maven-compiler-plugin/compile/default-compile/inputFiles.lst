@@ -1,6 +1,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/ProductCategoryController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysLoginController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysDeptController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/VwProductWithUserController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysProfileController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysMenuController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/SysOperlogController.java
@@ -16,6 +17,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/ServerController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/ReviewController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/tool/TestController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SallerOrderController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/CacheController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysUserController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/common/CommonController.java
@@ -28,6 +30,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysRoleController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysConfigController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/RuoYiApplication.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SallerProductController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysDictDataController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/UserAddressController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/SysUserOnlineController.java

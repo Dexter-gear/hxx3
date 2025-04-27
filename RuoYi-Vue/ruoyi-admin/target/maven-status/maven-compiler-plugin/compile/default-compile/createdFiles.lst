@@ -1,10 +1,12 @@
 com/ruoyi/web/controller/monitor/CacheController.class
 com/ruoyi/system/controller/ViewProductReviewsController.class
 com/ruoyi/system/controller/OrderController.class
+com/ruoyi/system/controller/SallerProductController.class
 com/ruoyi/system/controller/AddressController.class
 com/ruoyi/web/controller/system/SysProfileController.class
 com/ruoyi/web/controller/system/SysMenuController.class
 com/ruoyi/web/controller/monitor/SysOperlogController.class
+com/ruoyi/system/controller/SallerOrderController.class
 com/ruoyi/web/controller/system/SysDictDataController.class
 com/ruoyi/web/controller/common/CommonController.class
 com/ruoyi/web/core/config/SwaggerConfig.class
@@ -18,6 +20,7 @@ com/ruoyi/web/controller/system/SysConfigController.class
 com/ruoyi/web/controller/system/SysRegisterController.class
 com/ruoyi/system/controller/CartController.class
 com/ruoyi/web/controller/system/SysIndexController.class
+com/ruoyi/system/controller/VwProductWithUserController.class
 com/ruoyi/RuoYiApplication.class
 com/ruoyi/web/controller/system/SysDeptController.class
 com/ruoyi/system/controller/ProductController.class

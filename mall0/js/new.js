@@ -197,21 +197,47 @@ document.addEventListener('DOMContentLoaded', async () => {
           body: JSON.stringify(productData)
         });
         
-        if (response.ok) {
-          alert('商品添加成功！');
-          productForm.reset();
-          if (previewImg) {
-            previewImg.src = '';
-            previewImg.style.display = 'none';
+        if (response.code === 200) {
+          // 获取返回的产品ID
+          const productId = response.data.productId;
+          
+          // 将产品ID添加到saller-product关联表
+          if (productId) {
+            try {
+              const sallerProductResponse = await authorizedFetch("http://localhost:8080/system/saller_product", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  productId: productId
+                })
+              });
+              
+              if (sallerProductResponse.code === 200) {
+                alert('商品添加成功！');
+                productForm.reset();
+                if (previewImg) {
+                  previewImg.src = '';
+                  previewImg.style.display = 'none';
+                }
+                if (removeButton) {
+                  removeButton.style.display = 'none';
+                }
+                currentFile = null;
+                imageUrl = null;
+              } else {
+                alert('商品添加成功，但关联卖家失败：' + sallerProductResponse.msg);
+              }
+            } catch (error) {
+              console.error('关联卖家时出错：', error);
+              alert('商品添加成功，但关联卖家失败，请稍后重试');
+            }
+          } else {
+            alert('商品添加成功，但未获取到产品ID');
           }
-          if (removeButton) {
-            removeButton.style.display = 'none';
-          }
-          currentFile = null;
-          imageUrl = null;
         } else {
-          const error = await response.json();
-          alert(`添加失败：${error.message}`);
+          alert(`添加失败：${response.msg}`);
         }
       } catch (error) {
         console.error('提交商品时出错：', error);

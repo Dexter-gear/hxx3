@@ -1,6 +1,21 @@
 import { authorizedFetch } from './request.js';
 import { addToCart } from './cartJit.js';
 
+// 获取用户关联的商品ID列表
+async function getUserProductIds() {
+  try {
+    const response = await authorizedFetch('http://localhost:8080/system/saller_product/list');
+    if (response.code === 200 && response.rows) {
+      // 直接返回productId数组
+      return response.rows.map(item => item.productId);
+    }
+    return [];
+  } catch (error) {
+    console.error('获取用户关联商品失败：', error);
+    return [];
+  }
+}
+
 // 渲染商品列表
 export function renderProducts(products) {
   const productList = document.getElementById('product-list');
@@ -31,13 +46,16 @@ export function renderProducts(products) {
               <a href="single-product2.html?product_id=${product.productId}">${product.name}</a>
             </h5>
             <div class="product-price-wrap">
-              <div class="product-price">¥${product.price}</div>
+              <div class="product-price">¥${product.price}/kg</div>
               <div class="product-status ${statusClass}">${statusText}</div>
             </div>
           </div>
           <div class="product-button-wrap">
             <div class="product-button">
               <a class="button button-secondary" href="single-product2.html?product_id=${product.productId}" title="查看详情">🔍</a>
+            </div>
+            <div class="product-button">
+              <a class="button button-primary" href="product_update.html?id=${product.productId}" title="编辑商品">✏️</a>
             </div>
           </div>
         </article>
@@ -51,9 +69,34 @@ export function renderProducts(products) {
 // 初始化加载所有商品
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    // 获取用户关联的商品ID列表
+    const userProductIds = await getUserProductIds();
+    console.log('用户关联的商品ID：', userProductIds); // 添加日志
+    
+    // 获取所有商品
     const response = await authorizedFetch('http://localhost:8080/system/product/list');
     if (response.code === 200) {
-      renderProducts(response.rows);
+      // 过滤出用户关联的商品
+      const filteredProducts = response.rows.filter(product => 
+        userProductIds.includes(product.productId)
+      );
+      
+      console.log('过滤后的商品：', filteredProducts); // 添加日志
+      
+      if (filteredProducts.length === 0) {
+        const productList = document.getElementById('product-list');
+        if (productList) {
+          productList.innerHTML = `
+            <div class="col-12 text-center">
+              <div class="alert alert-info" role="alert">
+                您还没有关联任何商品
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        renderProducts(filteredProducts);
+      }
     } else {
       throw new Error(response.msg || '获取数据失败');
     }

@@ -25,6 +25,9 @@ import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * 订单Controller
@@ -100,8 +103,16 @@ public class OrderController extends BaseController
         // 获取当前的用户名称
         Long userId = loginUser.getUserId();
         order.setUserId(userId);
-        return toAjax(orderService.insertOrder(order));
-    }
+          int result = orderService.insertOrder(order);
+     if (result > 0) {
+         // 返回成功结果，并附带订单ID
+         Map<String, Object> data = new HashMap<>();
+         data.put("orderId", order.getOrderId());
+         return AjaxResult.success("订单创建成功", data);
+     } else {
+         return AjaxResult.error("订单创建失败");
+     }
+     }
 
     /**
      * 修改订单
