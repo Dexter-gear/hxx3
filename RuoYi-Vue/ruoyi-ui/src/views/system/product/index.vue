@@ -123,9 +123,9 @@
       <el-table-column label="商品类别ID" align="center" prop="categoryId" width="100" />
       <el-table-column label="商品名称" align="center" prop="name" min-width="120" />
       <el-table-column label="商品描述" align="left" prop="description" min-width="400"  />
-      <el-table-column label="商品价格" align="center" prop="price" width="100" />
+      <el-table-column label="商品价格/元/kg" align="center" prop="price" width="100" />
       <el-table-column label="品质等级" align="center" prop="qualityLevel" width="100" />
-      <el-table-column label="库存数量" align="center" prop="stock" width="100" />
+      <el-table-column label="库存数量/kg" align="center" prop="stock" width="100" />
       <el-table-column label="商品图片URL" align="center" prop="imageUrl" min-width="150" show-overflow-tooltip />
       <el-table-column label="创建时间" align="center" prop="createdAt" width="120">
         <template slot-scope="scope">

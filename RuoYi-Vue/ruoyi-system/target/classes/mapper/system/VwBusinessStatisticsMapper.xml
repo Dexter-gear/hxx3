@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.VwBusinessStatisticsMapper">
+    
+    <resultMap type="VwBusinessStatistics" id="VwBusinessStatisticsResult">
+        <result property="module"    column="module"    />
+        <result property="stats"    column="stats"    />
+    </resultMap>
+
+    <sql id="selectVwBusinessStatisticsVo">
+        select module, stats from vw_business_statistics
+    </sql>
+
+    <select id="selectVwBusinessStatisticsList" parameterType="VwBusinessStatistics" resultMap="VwBusinessStatisticsResult">
+        <include refid="selectVwBusinessStatisticsVo"/>
+        <where>  
+            <if test="module != null  and module != ''"> and module = #{module}</if>
+            <if test="stats != null  and stats != ''"> and stats = #{stats}</if>
+        </where>
+    </select>
+    
+    <select id="selectVwBusinessStatisticsByModule" parameterType="String" resultMap="VwBusinessStatisticsResult">
+        <include refid="selectVwBusinessStatisticsVo"/>
+        where module = #{module}
+    </select>
+
+    <insert id="insertVwBusinessStatistics" parameterType="VwBusinessStatistics">
+        insert into vw_business_statistics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="module != null and module != ''">module,</if>
+            <if test="stats != null">stats,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="module != null and module != ''">#{module},</if>
+            <if test="stats != null">#{stats},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVwBusinessStatistics" parameterType="VwBusinessStatistics">
+        update vw_business_statistics
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stats != null">stats = #{stats},</if>
+        </trim>
+        where module = #{module}
+    </update>
+
+    <delete id="deleteVwBusinessStatisticsByModule" parameterType="String">
+        delete from vw_business_statistics where module = #{module}
+    </delete>
+
+    <delete id="deleteVwBusinessStatisticsByModules" parameterType="String">
+        delete from vw_business_statistics where module in 
+        <foreach item="module" collection="array" open="(" separator="," close=")">
+            #{module}
+        </foreach>
+    </delete>
+</mapper>

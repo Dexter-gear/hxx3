@@ -60,7 +60,7 @@
                     </li>
                     <li class="rd-nav-item"><a class="rd-nav-link" href="checkout2.html">订单中心</a>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="profile.html">个人中心</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="profile2.html">个人中心</a>
                     </li>
                   </ul>
                 </div>
@@ -200,6 +200,16 @@
     <script src="js/script.js"></script>
     <script src="js/order-list2.js" type="module"></script>
     <style>
+      /* 重置按钮默认样式 */
+      button {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: none;
+        font: inherit;
+        line-height: normal;
+      }
+
       .orders-container {
         padding: 20px;
         max-width: 1200px;
@@ -246,19 +256,37 @@
         border-radius: 4px;
         color: #666;
       }
-      .button-primary {
+
+      /* 重新定义按钮样式 */
+      .order-actions {
+        display: flex;
+        gap: 15px;
+        margin-left: 20px;
+        align-items: center;
+      }
+
+      .order-actions .button.button-primary {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100px;
+        height: 36px;
+        line-height: 36px;
+        padding: 0;
         background-color: #4CAF50;
         color: white;
-        padding: 8px 16px;
-        border: none;
         border-radius: 4px;
-        cursor: pointer;
         font-size: 14px;
+        text-align: center;
+        cursor: pointer;
         transition: background-color 0.3s;
+        margin: 0;
+        vertical-align: middle;
       }
-      .button-primary:hover {
+
+      .order-actions .button.button-primary:hover {
         background-color: #45a049;
       }
+
       .order-detail-item {
         display: flex;
         align-items: center;
@@ -280,14 +308,6 @@
         color: #666;
         font-size: 14px;
       }
-      .order-actions {
-        display: flex;
-        gap: 10px;
-        margin-left: 20px;
-      }
-      .order-actions .button {
-        white-space: nowrap;
-      }
       @media (max-width: 768px) {
         .order-header {
           flex-direction: column;
@@ -298,10 +318,7 @@
         }
         .order-actions {
           margin-left: 0;
-          flex-wrap: wrap;
-        }
-        .order-actions .button {
-          width: 100%;
+          justify-content: flex-end;
         }
       }
     </style>

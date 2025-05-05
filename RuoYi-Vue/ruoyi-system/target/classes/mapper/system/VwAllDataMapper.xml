@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.VwAllDataMapper">
+    
+    <resultMap type="VwAllData" id="VwAllDataResult">
+        <result property="tableName"    column="table_name"    />
+        <result property="rowData"    column="row_data"    />
+    </resultMap>
+
+    <sql id="selectVwAllDataVo">
+        select table_name, row_data from vw_all_data
+    </sql>
+
+    <select id="selectVwAllDataList" parameterType="VwAllData" resultMap="VwAllDataResult">
+        <include refid="selectVwAllDataVo"/>
+        <where>  
+            <if test="tableName != null  and tableName != ''"> and table_name like concat('%', #{tableName}, '%')</if>
+            <if test="rowData != null  and rowData != ''"> and row_data = #{rowData}</if>
+        </where>
+    </select>
+    
+    <select id="selectVwAllDataByTableName" parameterType="String" resultMap="VwAllDataResult">
+        <include refid="selectVwAllDataVo"/>
+        where table_name = #{tableName}
+    </select>
+
+    <insert id="insertVwAllData" parameterType="VwAllData">
+        insert into vw_all_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tableName != null and tableName != ''">table_name,</if>
+            <if test="rowData != null">row_data,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tableName != null and tableName != ''">#{tableName},</if>
+            <if test="rowData != null">#{rowData},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVwAllData" parameterType="VwAllData">
+        update vw_all_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="rowData != null">row_data = #{rowData},</if>
+        </trim>
+        where table_name = #{tableName}
+    </update>
+
+    <delete id="deleteVwAllDataByTableName" parameterType="String">
+        delete from vw_all_data where table_name = #{tableName}
+    </delete>
+
+    <delete id="deleteVwAllDataByTableNames" parameterType="String">
+        delete from vw_all_data where table_name in 
+        <foreach item="tableName" collection="array" open="(" separator="," close=")">
+            #{tableName}
+        </foreach>
+    </delete>
+</mapper>

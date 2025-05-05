@@ -189,6 +189,14 @@ new Vue({
         console.error('上传头像失败:', error);
         this.$message.error('上传失败');
       }
+    },
+    
+    // 退出登录
+    handleLogout() {
+      // 清除本地token
+      localStorage.removeItem('token');
+      // 跳转到登录页
+      window.location.href = 'login.html';
     }
   },
   mounted() {

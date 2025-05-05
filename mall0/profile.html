@@ -319,7 +319,7 @@
       </div>
     </div>
     <div class="page">
-      <!-- Page Header-->
+         <!-- Page Header-->
       <header class="section page-header">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
@@ -335,15 +335,25 @@
                     <!--Brand--><a class="brand" href="../"><img class="brand-logo-dark" src="images/logo-default-280x92.png" alt="" width="140" height="46"/><img class="brand-logo-light" src="images/logo-inverse-280x92.png" alt="" width="140" height="46"/></a>
                   </div>
                 </div>
-
-                <div class="rd-navbar-nav-wrap">
+               <div class="rd-navbar-nav-wrap">
                   <ul class="rd-navbar-nav">
+  <li class="rd-nav-item active"><a class="rd-nav-link" href="./index.html">首页</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="grid-shop.html">商品列表</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="cart-page.html">购物车</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="checkout.html">订单中心</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="profile.html">个人中心</a>
+                    </li>
                   </ul>
                 </div>
              <div class="rd-navbar-main-element">
      
                   <!-- RD Navbar Basket-->
                   <div class="rd-navbar-basket-wrap">
+                    <button class="rd-navbar-basket fl-bigmug-line-shopping202" data-rd-navbar-toggle=".cart-inline"><span>2</span></button>
                     <div class="cart-inline">
                       <div class="cart-inline-header">
                         <h5 class="cart-inline-title">购物车:<span> 2</span> 件商品</h5>
@@ -417,10 +427,10 @@
         </div>
       </header>
       <section class="breadcrumbs-custom">
-        <div class="parallax-container" data-parallax-img="images/bg-shop.jpg">
+        <div class="parallax-container" data-parallax-img="images/product/bg.png">
           <div class="breadcrumbs-custom-body parallax-content context-dark">
             <div class="container">
-              <h2 class="breadcrumbs-custom-title">登录</h2>
+              <h2 class="breadcrumbs-custom-title">个人中心</h2>
             </div>
           </div>
         </div>
@@ -474,7 +484,7 @@
                 <div class="card-body">
                   <el-tabs v-model="activeTab">
                     <el-tab-pane label="基本资料" name="userinfo">
-                      <el-form ref="userForm" :model="user" :rules="rules" label-width="100px">
+                      <el-form ref="userForm" :model="user" :rules="rules" label-width="80px">
                         <el-form-item label="用户名称" prop="userName">
                           <el-input v-model="user.userName" disabled></el-input>
                         </el-form-item>
@@ -484,10 +494,11 @@
                         <el-form-item label="邮箱" prop="email">
                           <el-input v-model="user.email"></el-input>
                         </el-form-item>
-                        <el-form-item>
-                          <el-button type="primary" @click="submitUserInfo">保存</el-button>
-                        </el-form-item>
                       </el-form>
+                      <div style="text-align: center; margin-top: 20px;">
+                        <el-button type="primary" @click="submitUserInfo">保存</el-button>
+                        <el-button type="danger" @click="handleLogout">退出登录</el-button>
+                      </div>
                     </el-tab-pane>
                     <el-tab-pane label="修改密码" name="resetPwd">
                       <el-form ref="pwdForm" :model="pwdForm" :rules="pwdRules" label-width="100px">

@@ -93,7 +93,7 @@ async function fetchProductInfo(productId) {
 function renderOrderDetail(order) {
   const orderDetailContainer = document.getElementById("order-detail");
   const paymentButton = document.getElementById("payment-button");
-  const paymentQrcode = document.getElementById("payment-qrcode");
+  const qrcodeContainer = document.querySelector(".qrcode-container");
   
   if (!orderDetailContainer) {
     console.error("找不到订单详情容器元素");
@@ -103,7 +103,9 @@ function renderOrderDetail(order) {
   if (!order) {
     orderDetailContainer.innerHTML = "<p>未找到订单信息</p>";
     paymentButton.style.display = "none";
-    paymentQrcode.style.display = "none";
+    if (qrcodeContainer) {
+      qrcodeContainer.style.display = "none";
+    }
     return;
   }
 
@@ -150,10 +152,14 @@ function renderOrderDetail(order) {
   // 根据paymentStatus决定是否显示付款按钮和二维码
   if (order.paymentStatus === 1) {
     paymentButton.style.display = "none";
-    paymentQrcode.style.display = "none";
+    if (qrcodeContainer) {
+      qrcodeContainer.style.display = "none";
+    }
   } else {
     paymentButton.style.display = "inline-block";
-    paymentQrcode.style.display = "block";
+    if (qrcodeContainer) {
+      qrcodeContainer.style.display = "flex";
+    }
   }
   
   // 添加付款按钮点击事件
@@ -175,7 +181,9 @@ function renderOrderDetail(order) {
         paymentButton.disabled = true;
         paymentButton.textContent = '已付款';
         paymentButton.style.display = "none";
-        paymentQrcode.style.display = "none";
+        if (qrcodeContainer) {
+          qrcodeContainer.style.display = "none";
+        }
       } else {
         alert('付款状态更新失败，请稍后重试');
       }

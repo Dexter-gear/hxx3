@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ReviewReplyMapper">
+    
+    <resultMap type="ReviewReply" id="ReviewReplyResult">
+        <result property="replyId"    column="reply_id"    />
+        <result property="reviewId"    column="review_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="comment"    column="comment"    />
+        <result property="createdAt"    column="created_at"    />
+    </resultMap>
+
+    <sql id="selectReviewReplyVo">
+        select reply_id, review_id, user_id, comment, created_at from review_reply
+    </sql>
+
+    <select id="selectReviewReplyList" parameterType="ReviewReply" resultMap="ReviewReplyResult">
+        <include refid="selectReviewReplyVo"/>
+        <where>  
+            <if test="reviewId != null "> and review_id = #{reviewId}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+        </where>
+    </select>
+    
+    <select id="selectReviewReplyByReplyId" parameterType="Long" resultMap="ReviewReplyResult">
+        <include refid="selectReviewReplyVo"/>
+        where reply_id = #{replyId}
+    </select>
+
+    <insert id="insertReviewReply" parameterType="ReviewReply" useGeneratedKeys="true" keyProperty="replyId">
+        insert into review_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reviewId != null">review_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="comment != null and comment != ''">comment,</if>
+            <if test="createdAt != null">created_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reviewId != null">#{reviewId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="comment != null and comment != ''">#{comment},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateReviewReply" parameterType="ReviewReply">
+        update review_reply
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="reviewId != null">review_id = #{reviewId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="comment != null and comment != ''">comment = #{comment},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where reply_id = #{replyId}
+    </update>
+
+    <delete id="deleteReviewReplyByReplyId" parameterType="Long">
+        delete from review_reply where reply_id = #{replyId}
+    </delete>
+
+    <delete id="deleteReviewReplyByReplyIds" parameterType="String">
+        delete from review_reply where reply_id in 
+        <foreach item="replyId" collection="array" open="(" separator="," close=")">
+            #{replyId}
+        </foreach>
+    </delete>
+</mapper>

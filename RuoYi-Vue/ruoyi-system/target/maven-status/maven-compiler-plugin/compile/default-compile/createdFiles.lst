@@ -6,17 +6,22 @@ com/ruoyi/system/domain/SysLogininfor.class
 com/ruoyi/system/mapper/SysRoleMenuMapper.class
 com/ruoyi/system/domain/SysUserOnline.class
 com/ruoyi/system/domain/SallerProduct.class
+com/ruoyi/system/mapper/VwBusinessStatisticsMapper.class
 com/ruoyi/system/domain/UserAddress.class
 com/ruoyi/system/domain/Order.class
 com/ruoyi/system/service/ISysMenuService.class
+com/ruoyi/system/domain/VwAllData.class
 com/ruoyi/system/mapper/SysDeptMapper.class
+com/ruoyi/system/service/impl/ReviewReplyServiceImpl.class
 com/ruoyi/system/mapper/AddressMapper.class
 com/ruoyi/system/service/ISysDictTypeService.class
 com/ruoyi/system/service/impl/SysPostServiceImpl.class
+com/ruoyi/system/mapper/VwAllDataMapper.class
 com/ruoyi/system/service/IOrderService.class
 com/ruoyi/system/domain/VwProductWithUser.class
 com/ruoyi/system/domain/ViewProductReviews.class
 com/ruoyi/system/service/impl/OrderDetailServiceImpl.class
+com/ruoyi/system/service/IVwAllDataService.class
 com/ruoyi/system/service/IReviewService.class
 com/ruoyi/system/service/ISallerProductService.class
 com/ruoyi/system/service/ISysLogininforService.class
@@ -25,6 +30,7 @@ com/ruoyi/system/mapper/SysDictTypeMapper.class
 com/ruoyi/system/mapper/ProductCategoryMapper.class
 com/ruoyi/system/domain/SysPost.class
 com/ruoyi/system/mapper/VwProductWithUserMapper.class
+com/ruoyi/system/service/impl/VwBusinessStatisticsServiceImpl.class
 com/ruoyi/system/mapper/SysLogininforMapper.class
 com/ruoyi/system/service/impl/SallerOrderServiceImpl.class
 com/ruoyi/system/service/ISysDictDataService.class
@@ -41,6 +47,7 @@ com/ruoyi/system/mapper/SysRoleDeptMapper.class
 com/ruoyi/system/service/IViewProductReviewsService.class
 com/ruoyi/system/service/ISysConfigService.class
 com/ruoyi/system/service/impl/SysMenuServiceImpl.class
+com/ruoyi/system/domain/VwBusinessStatistics.class
 com/ruoyi/system/service/impl/ViewProductReviewsServiceImpl.class
 com/ruoyi/system/domain/Address.class
 com/ruoyi/system/domain/OrderDetail.class
@@ -53,6 +60,7 @@ com/ruoyi/system/domain/SysOperLog.class
 com/ruoyi/system/domain/SysRoleDept.class
 com/ruoyi/system/service/impl/SallerProductServiceImpl.class
 com/ruoyi/system/service/IProductService.class
+com/ruoyi/system/mapper/ReviewReplyMapper.class
 com/ruoyi/system/service/impl/CartServiceImpl.class
 com/ruoyi/system/service/impl/SysLogininforServiceImpl.class
 com/ruoyi/system/mapper/SysOperLogMapper.class
@@ -72,6 +80,8 @@ com/ruoyi/system/mapper/SysRoleMapper.class
 com/ruoyi/system/mapper/ReviewMapper.class
 com/ruoyi/system/service/ISysRoleService.class
 com/ruoyi/system/service/IOrderDetailService.class
+com/ruoyi/system/service/IReviewReplyService.class
+com/ruoyi/system/domain/ReviewReply.class
 com/ruoyi/system/service/ISallerOrderService.class
 com/ruoyi/system/service/impl/SysOperLogServiceImpl.class
 com/ruoyi/system/mapper/SysUserPostMapper.class
@@ -79,6 +89,7 @@ com/ruoyi/system/mapper/SysMenuMapper.class
 com/ruoyi/system/mapper/SysDictDataMapper.class
 com/ruoyi/system/service/ISysPostService.class
 com/ruoyi/system/mapper/ProductMapper.class
+com/ruoyi/system/service/IVwBusinessStatisticsService.class
 com/ruoyi/system/service/impl/SysNoticeServiceImpl.class
 com/ruoyi/system/domain/Cart.class
 com/ruoyi/system/service/impl/ProductCategoryServiceImpl.class
@@ -96,5 +107,6 @@ com/ruoyi/system/domain/SysCache.class
 com/ruoyi/system/domain/SysRoleMenu.class
 com/ruoyi/system/mapper/SysPostMapper.class
 com/ruoyi/system/service/impl/UserAddressServiceImpl.class
+com/ruoyi/system/service/impl/VwAllDataServiceImpl.class
 com/ruoyi/system/mapper/OrderDetailMapper.class
 com/ruoyi/system/service/impl/SysUserOnlineServiceImpl.class

@@ -1,4 +1,5 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/ProductCategoryController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/ReviewReplyController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysLoginController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysDeptController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/VwProductWithUserController.java
@@ -11,6 +12,7 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/OrderDetailController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysPostController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/common/CaptchaController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/VwAllDataController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/CartController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/ViewProductReviewsController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysIndexController.java
@@ -34,3 +36,4 @@
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/SysDictDataController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/UserAddressController.java
 /Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/monitor/SysUserOnlineController.java
+/Users/lingluo/Documents/project/hxx3/RuoYi-Vue/ruoyi-admin/src/main/java/com/ruoyi/web/controller/system/VwBusinessStatisticsController.java
