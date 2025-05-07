@@ -21,6 +21,8 @@ import com.ruoyi.system.service.IViewProductReviewsService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 评论详情Controller
  * 
@@ -41,7 +43,10 @@ public class ViewProductReviewsController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(ViewProductReviews viewProductReviews)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<ViewProductReviews> list = viewProductReviewsService.selectViewProductReviewsList(viewProductReviews);
         return getDataTable(list);
     }

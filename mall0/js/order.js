@@ -40,9 +40,7 @@ async function submitOrder(addressId) {
         })
       })
       .then(async response => {
-        if (response.code !== 200) {
-          throw new Error(response.msg || "订单创建失败");
-        }
+
 
         const orderId = response.data.orderId;
 

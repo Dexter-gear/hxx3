@@ -26,6 +26,8 @@ import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 用户地址信息Controller
  * 
@@ -59,7 +61,10 @@ public class UserAddressController extends BaseController
         Long userId = loginUser.getUserId();
         
         userAddress.setUserId(userId);
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<UserAddress> list = userAddressService.selectUserAddressList(userAddress);
         return getDataTable(list);
     }

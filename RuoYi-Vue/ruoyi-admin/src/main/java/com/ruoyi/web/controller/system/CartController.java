@@ -25,6 +25,8 @@ import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 
 /**
  * 购物车Controller
@@ -59,7 +61,10 @@ public class CartController extends BaseController
         
         cart.setUserId(userId);
         
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<Cart> list = cartService.selectCartList(cart);
         return getDataTable(list);
     }

@@ -92,8 +92,6 @@ async function fetchProductInfo(productId) {
 
 function renderOrderDetail(order) {
   const orderDetailContainer = document.getElementById("order-detail");
-  const paymentButton = document.getElementById("payment-button");
-  const qrcodeContainer = document.querySelector(".qrcode-container");
   
   if (!orderDetailContainer) {
     console.error("找不到订单详情容器元素");
@@ -102,10 +100,6 @@ function renderOrderDetail(order) {
 
   if (!order) {
     orderDetailContainer.innerHTML = "<p>未找到订单信息</p>";
-    paymentButton.style.display = "none";
-    if (qrcodeContainer) {
-      qrcodeContainer.style.display = "none";
-    }
     return;
   }
 
@@ -113,6 +107,7 @@ function renderOrderDetail(order) {
   const totalAmount = order.details.reduce((sum, detail) => sum + (detail.price * detail.quantity), 0);
   
   const orderDetails = Array.isArray(order.details) ? order.details : [];
+  console.log("支付状态：", order.paymentStatus);
   
   const orderDetailHtml = `
     <div class="orders-container">
@@ -120,6 +115,7 @@ function renderOrderDetail(order) {
         <div class="order-header">
           <span>订单号：${orderId}</span>
           <span>总金额：¥${totalAmount.toFixed(2)}</span>
+          <span>支付状态：${order.paymentStatus === "1" ? '已支付' : '待支付'}</span>
         </div>
         <div class="order-details">
           ${orderDetails.map(detail => {
@@ -143,53 +139,14 @@ function renderOrderDetail(order) {
             `;
           }).join('')}
         </div>
+        ${order.paymentStatus !== "1" ? `
+          <div style="text-align: center; margin-top: 20px;">
+            <button onclick="window.location.href='payment.html?orderId=${orderId}&amount=${totalAmount.toFixed(2)}'" class="button button-primary button-zakaria">去支付</button>
+          </div>
+        ` : ''}
       </div>
     </div>
   `;
 
   orderDetailContainer.innerHTML = orderDetailHtml;
-  
-  // 根据paymentStatus决定是否显示付款按钮和二维码
-  if (order.paymentStatus === 1) {
-    paymentButton.style.display = "none";
-    if (qrcodeContainer) {
-      qrcodeContainer.style.display = "none";
-    }
-  } else {
-    paymentButton.style.display = "inline-block";
-    if (qrcodeContainer) {
-      qrcodeContainer.style.display = "flex";
-    }
-  }
-  
-  // 添加付款按钮点击事件
-  paymentButton.onclick = async () => {
-    try {
-      const response = await authorizedFetch(`http://localhost:8080/system/order`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderId: orderId,
-          paymentStatus: 1
-        })
-      });
-      
-      if (response && response.code === 200) {
-        alert('付款状态更新成功！');
-        paymentButton.disabled = true;
-        paymentButton.textContent = '已付款';
-        paymentButton.style.display = "none";
-        if (qrcodeContainer) {
-          qrcodeContainer.style.display = "none";
-        }
-      } else {
-        alert('付款状态更新失败，请稍后重试');
-      }
-    } catch (error) {
-      console.error('更新付款状态失败：', error);
-      alert('付款状态更新失败，请稍后重试');
-    }
-  };
 }

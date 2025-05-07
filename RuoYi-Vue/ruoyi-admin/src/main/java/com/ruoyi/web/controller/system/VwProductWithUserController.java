@@ -21,6 +21,8 @@ import com.ruoyi.system.service.IVwProductWithUserService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * VIEWController
  * 
@@ -41,7 +43,10 @@ public class VwProductWithUserController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(VwProductWithUser vwProductWithUser)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<VwProductWithUser> list = vwProductWithUserService.selectVwProductWithUserList(vwProductWithUser);
         return getDataTable(list);
     }

@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 
 /**
  * 销售员-订单关联Controller
@@ -55,7 +57,10 @@ public class SallerOrderController extends BaseController
         LoginUser loginUser = tokenService.getLoginUser(request);
         Long userId = loginUser.getUser().getUserId();
         sallerOrder.setUserId(userId);  
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<SallerOrder> list = sallerOrderService.selectSallerOrderList(sallerOrder);
         return getDataTable(list);
     }

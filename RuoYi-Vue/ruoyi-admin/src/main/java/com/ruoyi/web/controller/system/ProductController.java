@@ -25,6 +25,8 @@ import com.ruoyi.common.core.domain.model.LoginUser;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 商品Controller
  * 
@@ -49,7 +51,10 @@ public class ProductController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Product product)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<Product> list = productService.selectProductList(product);
         return getDataTable(list);
     }

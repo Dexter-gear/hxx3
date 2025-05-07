@@ -21,6 +21,8 @@ import com.ruoyi.system.service.IVwAllDataService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 数据分析Controller
  * 
@@ -41,7 +43,10 @@ public class VwAllDataController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(VwAllData vwAllData)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<VwAllData> list = vwAllDataService.selectVwAllDataList(vwAllData);
         return getDataTable(list);
     }

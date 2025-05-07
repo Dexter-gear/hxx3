@@ -21,6 +21,8 @@ import com.ruoyi.system.service.IVwBusinessStatisticsService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 统计数据Controller
  * 
@@ -41,7 +43,10 @@ public class VwBusinessStatisticsController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(VwBusinessStatistics vwBusinessStatistics)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<VwBusinessStatistics> list = vwBusinessStatisticsService.selectVwBusinessStatisticsList(vwBusinessStatistics);
         return getDataTable(list);
     }

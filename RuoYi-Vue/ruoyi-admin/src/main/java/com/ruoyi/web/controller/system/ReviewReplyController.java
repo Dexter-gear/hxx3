@@ -26,6 +26,9 @@ import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 商家回复用户评论Controller
  * 
@@ -50,7 +53,10 @@ public class ReviewReplyController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(ReviewReply reviewReply)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<ReviewReply> list = reviewReplyService.selectReviewReplyList(reviewReply);
         return getDataTable(list);
     }

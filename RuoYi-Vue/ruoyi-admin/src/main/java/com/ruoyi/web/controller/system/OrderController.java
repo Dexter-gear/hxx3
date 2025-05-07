@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 
 /**
  * 订单Controller
@@ -60,7 +62,10 @@ public class OrderController extends BaseController
         // 获取当前的用户名称
         Long userId = loginUser.getUserId();
         order.setUserId(userId);    
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<Order> list = orderService.selectOrderList(order);
         return getDataTable(list);
     }

@@ -26,6 +26,8 @@ import com.ruoyi.framework.web.service.TokenService;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.StringUtils;
 
+import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.utils.PageUtils;
 /**
  * 评论Controller
  * 
@@ -46,7 +48,10 @@ public class ReviewController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(Review review)
     {
-        startPage();
+        // 设置每页大小为最大值
+        PageUtils.startPage();
+        // 手动设置分页参数
+        PageHelper.startPage(1, 10000);
         List<Review> list = reviewService.selectReviewList(review);
         return getDataTable(list);
     }
